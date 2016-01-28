@@ -29,7 +29,6 @@ accounts-ui
 accounts-password
 accounts-google
 accounts-github
-accounts-twitter
 useraccounts:unstyled
 useraccounts:flow-routing
 service-configuration

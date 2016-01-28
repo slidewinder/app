@@ -3,13 +3,17 @@
   <div class="valign">
     <img class="responsive-img" id="landing-logo" src="/img/logo_wide.svg">
     <h2 class="center-align" id="tagline">instant pick-and-mix slide decks</h2>
-    <div class="center-align" id="get-started">
-      <h1 class="center-align">welcome</h1>
-      <div class="center-align action-btn" id="get-started-btn">get started</div>
-    </div>
-    <div id="login-box">
-      {{> atForm}}
-    </div>
+    {{#if currentUser}}
+      <script>FlowRouter.go('/home');</script>
+    {{else}}
+      <div class="center-align" id="get-started">
+        <h1 class="center-align">welcome</h1>
+        <div class="center-align action-btn" id="get-started-btn">get started</div>
+      </div>
+      <div id="login-box">
+        {{> atForm}}
+      </div>
+    {{/if}}
   </div>
 </div>
 </template>

@@ -1,6 +1,8 @@
 Template.home.events({
   "click #get-started-btn": function(event) {
-    $('#get-started').animate({ height: 0 }, 500);
-    $('#login-box').animate({ height: '300px' }, 500);
+    $('#get-started').animate({ height: 0 }, function() {
+      $('#home-wrapper').animate({ 'margin-top': '5%' });
+      $('#login-box').animate({ height: '700px' });
+    }).hide();
   }
 })

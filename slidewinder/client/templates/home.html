@@ -1,14 +1,17 @@
 <template name="home">
-  <div class="valign-wrapper" id="landing-wrapper">
+  <div class="valign-wrapper" id="home-wrapper">
     <div class="valign">
-      <img class="responsive-img" id="landing-logo" src="/img/logo_wide.svg">
-      <h2 class="center-align" id="tagline">instant pick-and-mix slide decks</h2>
-      <div class="collection">
-        <a href="#!" class="collection-item">Create slide</a>
-        <a href="#!" class="collection-item">Create deck</a>
-        <a href="#!" class="collection-item">Present deck</a>
-        <a href="#!" class="collection-item">Manage library</a>
-        <a href="#!" class="collection-item">Help</a>
+      <img class="responsive-img" id="home-logo" src="/img/logo_wide.svg">
+      <h4 class="center-align" id="tagline">instant pick-and-mix slide decks</h4>
+      <div class="container">
+        <div class="collection" id="home-menu">
+          <a href="/slides/create" class="collection-item">Create slide</a>
+          <a href="/decks/create" class="collection-item">Create deck</a>
+          <a href="/decks/present" class="collection-item">Present deck</a>
+          <a href="/library" class="collection-item">Manage library</a>
+          <a href="/help" class="collection-item">Help</a>
+          <a href="/logout" class="collection-item">Logout</a>
+        </div>
       </div>
     </div>
   </div>

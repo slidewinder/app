@@ -28,3 +28,11 @@ meteorhacks:npm
 npm-container
 kadira:blaze-layout
 mquandalle:stylus
+accounts-base
+accounts-ui
+accounts-password
+accounts-google
+accounts-github
+accounts-twitter
+useraccounts:unstyled
+useraccounts:flow-routing

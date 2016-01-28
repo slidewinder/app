@@ -32,7 +32,7 @@ accounts-github
 accounts-twitter
 useraccounts:unstyled
 useraccounts:flow-routing
-
+service-configuration
 
 npm-container
 meteorhacks:kadira

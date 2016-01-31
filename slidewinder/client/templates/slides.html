@@ -1,3 +1,103 @@
 <template name="create_slide">
+<div class="main-view create-slide">
+  <div id="sidebar-left">
+    <nav>
+      <div class="nav-wrapper row-header">
+        <h5>templates</h5>
+      </div>
+    </nav>
+    {{#each template in templates}}
+      {{>template_card template}}
+    {{/each}}
+  </div>
+  <div id="content-pane">
+    {{>slide_editor}}
+  </div>
+  <div id="slide-editor-metadata">
+    <nav>
+      <div class="nav-wrapper row-header">
+        <h5>Metadata</h5>
+      </div>
+    </nav>
+    <form id="md_card_form">
+      <div class="input-field">
+        <label for="md_card_title" class="active">Title</label>
+        <input type="text" name="title" id="md_card_title" value="New slide">
+      </div>
+      <div class="input-field">
+        <label for="md_card_author" class="active">Author</label>
+        <input type="text" name="author" id="md_card_author" value="{{currentUser.profile.name}}">
+      </div>
+      <div class="input-field">
+        <label for="md_card_bg_img">Background image URL</label>
+        <input type="text" name="bg_img" id="md_card_bg_img">
+      </div>
+      <div class="input-field" id="tags-container">
+        <label for="md_card_tags">Tags (comma-separated )</label>
+        <div><input type="text" name="tags" id="md_card_tags"></div>
+      </div>
+    </form>
+    <div class="new_field row">
+      <div class="input-field col s9">
+        <input name="field_name" type="text" id="field_name" placeholder="name of new field">
+      </div>
+      <div class="input-field col s3">
+        <a id="md_addfield_btn">add field</a>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
 
+<template name="template_card">
+<div class="card grey lighten-4 template-card">
+  <div class="card-content">
+    <span class="card-title">{{name}}</span>
+    <div class="card-truncated">{{description}}</div>
+  </div>
+</div>
+</template>
+
+<template name="slide_editor">
+<div id="slide-editor-entry">
+  <div id="slide-editor-content">
+    {{> MDEdit id='slide-editor-mde' defaultContent="# {{slide.title}}\n\nby {{slide.author}}"}}
+  </div>
+</div>
+</template>
+
+<template name="slide_card">
+{{#if image}}
+  {{>slide_image_card this}}
+{{else}}
+  {{>slide_text_card this}}
+{{/if}}
+</template>
+
+<template name="slide_text_card">
+<div class="card green lighten-3 slide-card">
+  <div class="card-content white-text">
+    <span class="card-title">{{title}}</span>
+    <div class="card-truncated">{{truncatedContent}}</div>
+    <div class="card-menu">
+      <a href="#"><i class="mdi mdi-menu"></i></a>
+    </div>
+  </div>
+</div>
+</template>
+
+<template name="slide_image_card">
+<div class="card slide-card">
+  <div class="card-image">
+    <img class="slide-card-img" src="{{image}}">
+    <span class="card-title">{{title}}</span>
+  </div>
+  <div class="card-content">
+    <div class="card-truncated">{{truncatedContent}}</div>
+    <div class="card-menu valign-wrapper">
+      <a href="#" class="valign"><i class="mdi mdi-menu"></i></a>
+    </div>
+  </div>
+
+</div>
 </template>

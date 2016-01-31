@@ -1,0 +1,61 @@
+<template name="library">
+<div class="main-view">
+  <ul class="breadcrumb">
+    <li>home</li>
+    <li>library</li>
+  </ul>
+  <div class="decks row content-row">
+    {{>row_header 'decks'}}
+    <div>
+      <div class="row row-body">
+      {{#if decks}}
+        {{#each decks}}
+          {{>deck_card}}
+        {{/each}}
+      {{else}}
+        {{>no_decks}}
+      {{/if}}
+      </div>
+    </div>
+  </div>
+  <div class="slides row content-row">
+    {{>row_header 'slides'}}
+    <div class="row row-body">
+    {{#if slides}}
+      {{#each slide in slides}}
+        {{>slide_card slide}}
+      {{/each}}
+    {{else}}
+      {{>no_slides}}
+    {{/if}}
+    </div>
+  </div>
+</div>
+</template>
+
+<template name="row_header">
+<nav>
+  <div class="nav-wrapper row-header">
+    <h5>{{this}}</h5>
+    <form>
+      <div class="switch">
+        <label>
+          just me<input type="checkbox"><span class="lever"></span>everyone
+        </label>
+      </div>
+      <div class="search-wrapper">
+        <input id="search-{{this}}" type="search">
+        <i class="mdi mdi-magnify"></i>
+      </div>
+    </form>
+  </div>
+</nav>
+</template>
+
+<template name="no_decks">
+  <p>You don't have any decks yet! <a href="/decks/create">Create one to get started.</a></p>
+</template>
+
+<template name="no_slides">
+  <p>You don't have any slides yet! <a href="/slides/create">Create</a> or <a href="/slides/import">import</a> some to get started.</p>
+</template>

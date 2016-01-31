@@ -1,0 +1,8 @@
+{
+  "name": "slidewinder",
+  "version": "0.0.1",
+  "dependencies": {
+    "insignia": "4.4.0"
+  },
+  "private": true
+}

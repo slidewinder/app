@@ -1,15 +1,53 @@
 <template name="index">
-  <div class="container">
-    <!-- {{>Template.dynamic template=header}} -->
-    {{>Template.dynamic template=content}}
-    <!-- {{>Template.dynamic template=footer}} -->
+  {{#if currentUser}}
+    {{>home}}
+  {{else}}
+    {{>landing}}
+  {{/if}}
+</template>
+
+<template name="tiered_header">
+<nav id="header-nav">
+  <div class="logo-col">
+    <img class="responsive-img" src="/img/logo_header_with_tagline_wide_with_tagline.svg">
+  </div>
+  <div class="menu-col">
+    <a href="/slides/create" class="menu-btn">
+      <i class="mdi mdi-crop-square"></i> create slide
+    </a>
+    <a href="/decks/create" class="menu-btn">
+      <i class="mdi mdi-checkbox-multiple-blank-outline"></i> create deck
+    </a>
+    <a href="/decks/present" class="menu-btn">
+      <span class="mdi">&#9651;</span> present deck
+    </a>
+  </div>
+  <div class="menu-col">
+    <a href="/library" class="menu-btn">
+      <i class="mdi mdi-hexagon-outline"></i> manage library
+    </a>
+    <a href="/help" class="menu-btn">
+      <i class="mdi mdi-panorama-fisheye"></i> help
+    </a>
+    <a href="/" class="menu-btn">
+      <i class="mdi mdi-close"></i> exit
+    </a>
+  </div>
+  {{>userCard}}
+</nav>
+</template>
+
+<template name="userCard">
+  <div class="user-card">
+    {{> avatar user=currentUser shape="circle"}}
   </div>
 </template>
 
+<template name="tiered_footer">
+
+</template>
+
 <template name="tiered">
-  <div class="container">
-    {{>Template.dynamic template=header}}
-    {{>Template.dynamic template=content}}
-    {{>Template.dynamic template=footer}}
-  </div>
+  {{>tiered_header}}
+  {{>Template.dynamic template=content}}
 </template>

@@ -1,0 +1,20 @@
+{
+  "name": "insignia",
+  "main": "dist/insignia.js",
+  "version": "4.4.0",
+  "homepage": "https://github.com/bevacqua/insignia",
+  "authors": [
+    "Nicolas Bevacqua <nicolasbevacqua@gmail.com>"
+  ],
+  "description": "Customizable tag input. Progressive. No non-sense!",
+  "license": "MIT",
+  "_release": "4.4.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v4.4.0",
+    "commit": "e915f3b5aaad787611c09485c5e0614330441feb"
+  },
+  "_source": "git://github.com/bevacqua/insignia.git",
+  "_target": "4.4.0",
+  "_originalSource": "insignia"
+}

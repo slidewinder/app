@@ -1,0 +1,78 @@
+.main-view
+  margin 30px
+  color #666
+
+.breadcrumb
+  uppercase()
+  font-weight 100
+  font-size 0.8rem
+  color #666
+  breadcrumb()
+  margin-bottom 20px
+
+.content-row
+  margin-bottom 10px
+  border 1px solid #bbb
+
+  nav
+    box-shadow none
+    background: #f2f2f2 linear-gradient(to bottom, #fff, #f2f2f2) repeat-x
+
+  .row-header
+    border-bottom 1px solid #bbb
+    padding-left 20px
+    vertical-align middle
+    h5
+      uppercase()
+      font-weight 300
+      margin-top 0.7rem
+      vertical-align middle
+      color #666
+    form, input, i, h5
+      display inline-block
+    form
+      position absolute
+      top 0
+      right 0
+      margin 0
+      height 100%
+      width 520px
+      vertical-align middle
+    .search-wrapper
+      display inline-block
+      height 100%
+      width 334px
+      position absolute
+      right 0
+      top 0
+      i
+        color #bbb
+        position absolute
+        left 15px
+        top 0
+    input[type='search']
+      input()
+      margin 0
+      padding-left 46px
+      position absolute
+      top 8px
+      right 8px
+      height 32px
+      width 264px
+      color #555
+    .switch
+      uppercase()
+    .switch label input[type=checkbox]:checked + .lever
+      background-color green
+    .switch label input[type=checkbox]:checked + .lever:after
+      background-color: silver
+    .switch label input[type=checkbox]:not(:checked) + .lever
+      background-color blue
+    .switch label input[type=checkbox]:not(:checked) + .lever:after
+      background-color silver
+
+
+  .row-body
+    padding 30px
+    margin 0
+    text-align center

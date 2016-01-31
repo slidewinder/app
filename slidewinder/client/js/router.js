@@ -1,16 +1,6 @@
 FlowRouter.route('/', {
   action: function() {
-    if (Meteor.user() || Meteor.loggingIn()) {
-      FlowRouter.go('/home');
-    } else {
-      BlazeLayout.render("index", {content: "landing"});
-    }
-  }
-});
-
-FlowRouter.route('/home', {
-  action: function() {
-    BlazeLayout.render("index", {content: "home"});
+    BlazeLayout.render("index");
   }
 });
 

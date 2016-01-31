@@ -1,0 +1,178 @@
+@import 'jeet'
+@import 'axis'
+
+.main-view
+  position absolute
+  top 100px
+  bottom 0
+  left 0
+  right 0
+
+#sidebar-left
+  col(1/5)
+  height 100%
+  b()
+  overflow-x scroll
+  overflow-y hidden
+  margin-right 30px
+
+#content-pane
+  col(3/5)
+  height 100%
+  b()
+
+.slide-card
+  width 300px
+
+  .card-title
+    font-size 0.8rem
+    background-color rgba(0, 0, 0, 0.7)
+    width 100%
+    top 0
+    max-height 30%
+
+  .card-truncated
+    width 100%
+    height 100%
+    display inline-block
+    text-align left
+
+  .card-menu
+    width 62px
+    height 62px
+    position absolute
+    right 0
+    bottom 0
+    text-align center
+    padding 16px
+
+    .mdi
+      color gray
+
+.create-slide
+
+  nav
+    box-shadow none
+    background #f2f2f2 linear-gradient(to bottom, #fff, #f2f2f2) repeat-x
+
+  .row-header
+    border-bottom 1px solid #bbb
+    padding-left 20px
+    vertical-align middle
+    vertical-align middle
+    h5
+      height 100%
+      margin 0
+      vertical-align middle
+      uppercase()
+      font-weight 300
+      color #666
+      padding-top 20px
+
+.template-card
+  center()
+  width 90%
+  margin-top 20px
+  margin-bottom 0
+
+#slide-editor-entry
+  height 100%
+
+#slide-editor-content
+  height 100%
+  .editor-toolbar
+    z-index 100
+    background #f2f2f2 linear-gradient(to bottom, #fff, #f2f2f2) repeat-x
+    .fa
+      color #222 !important
+  .editor-statusbar
+    z-index 100
+  .CodeMirror
+    background rgba(1, 1, 1, 0)
+    box-shadow none
+    height 100%
+    margin-top -48px
+    padding-top 58px
+    padding-bottom 44px
+    margin-bottom -34px
+  .editor-preview
+    padding-top 58px
+    z-index 99
+
+
+#slide-editor-metadata
+  col(1/5)
+  height 100%
+  b()
+  position relative
+  form
+    position absolute
+    top 64px
+    bottom 76px
+    padding 10px
+    width 100%
+    overflow-y scroll
+
+    /* label color */
+    .input-field label {
+      color: #666;
+    }
+    /* label focus color */
+    .input-field input[type=text]:focus + label {
+      color: cornflowerBlue;
+    }
+    /* label underline focus color */
+    .input-field input[type=text]:focus {
+      border-bottom: 1px solid cornflowerBlue;
+      box-shadow: 0 1px 0 0 cornflowerBlue;
+    }
+
+    #tags-container
+      margin-top 0
+
+.new_field
+  position absolute
+  bottom 0
+  margin-bottom 0
+  width 100%
+#field_name
+  display inline-block
+#md_addfield_btn
+  button(silver)
+  display inline-block
+  padding 10px
+.nsg-editor {
+  cursor: text;
+  padding-top 35px;
+}
+.nsg-tag {
+  display: inline-block;
+  padding: 3px;
+  margin: 4px;
+  background-color: cornflowerBlue;
+  color: white;
+}
+.nsg-tag-remove:after {
+  margin-left: 4px;
+  padding: 0 4px;
+  content: 'x';
+  cursor: pointer;
+  background-color: white;
+  color: cornflowerBlue;
+}
+.nsg-input {
+  -webkit-transition: width 0.25s;
+  -moz-transition: width 0.25s;
+  -o-transition: width 0.25s;
+  -ms-transition: width 0.25s;
+  transition: width 0.25s;
+  padding: 3px;
+  margin: 5px 0;
+  width: 50px !important
+}
+.editor-preview
+  padding 0
+  iframe
+    width 100%
+    height 100%
+    border 0

@@ -15,9 +15,7 @@ Template.create_slide_sidebar.onRendered(function() {
     deletion: true
   });
 
-  $('.collapsible').collapsible({
-    accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-  });
+  $('.collapsible').collapsible();
 });
 
 Template.create_slide.events({

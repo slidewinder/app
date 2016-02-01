@@ -18,29 +18,45 @@ Template.create_slide_sidebar.onRendered(function() {
   $('.collapsible').collapsible();
 });
 
+var getSlideData = function() {
+  var body = MDEdit['slide-editor-mde'].value();
+  var metadata = {};
+  var fields = $("#md_card_form input").serializeArray();
+  for (x in fields) {
+    metadata[fields[x].name] = fields[x].value;
+  }
+  metadata.body = body;
+  return metadata;
+}
+
+var showSlidePreview = function(err, html) {
+  $('#slide-editor-content .editor-preview').empty();
+  $('<iframe>')
+    .attr('id', 'preview-frame')
+    .appendTo('#slide-editor-content .editor-preview');
+  var iframe = $('#preview-frame')[0];
+  iframe.contentWindow.document.open();
+  iframe.contentWindow.document.write(html);
+  iframe.contentWindow.document.close();
+}
+
+var slideSaved = function(err) {
+
+}
+
 Template.create_slide.events({
   'click .editor-toolbar > a.fa.fa-eye': function(e) {
     e.stopPropagation();
     if ($('a.fa.fa-eye').hasClass('active')) {
-      var body = MDEdit['slide-editor-mde'].value();
-      var metadata = {};
-      var fields = $("#md_card_form input").serializeArray();
-      for (x in fields) {
-        metadata[fields[x].name] = fields[x].value;
-      }
-      metadata.body = body;
-      Meteor.call('renderSlide', Meteor.user().profile.name, metadata, function(err, html) {
-        $('#slide-editor-content .editor-preview').empty();
-        $('<iframe>')
-          .attr('id', 'preview-frame')
-          .appendTo('#slide-editor-content .editor-preview');
-        var iframe = $('#preview-frame')[0];
-        iframe.contentWindow.document.open();
-        iframe.contentWindow.document.write(html);
-        iframe.contentWindow.document.close();
-      });
+      var slidedata = getSlideData();
+      var author = Meteor.user().profile.name;
+      Meteor.call('renderSlide', author, slidedata, showSlidePreview);
     }
     return false;
+  },
+  'click #save_slide_btn': function(e) {
+    var slidedata = getSlideData();
+    Meteor.call('saveSlide', slidedata, slideSaved);
   }
 })
 

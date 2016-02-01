@@ -1,52 +1,60 @@
 <template name="create_slide">
 <div class="main-view create-slide">
   <div id="sidebar-left">
-    <nav>
-      <div class="nav-wrapper row-header">
-        <h5>templates</h5>
-      </div>
-    </nav>
-    {{#each template in templates}}
-      {{>template_card template}}
-    {{/each}}
+    {{>create_slide_sidebar}}
   </div>
   <div id="content-pane">
     {{>slide_editor}}
   </div>
-  <div id="slide-editor-metadata">
-    <nav>
-      <div class="nav-wrapper row-header">
-        <h5>Metadata</h5>
-      </div>
-    </nav>
-    <form id="md_card_form">
-      <div class="input-field">
-        <label for="md_card_title" class="active">Title</label>
-        <input type="text" name="title" id="md_card_title" value="New slide">
-      </div>
-      <div class="input-field">
-        <label for="md_card_author" class="active">Author</label>
-        <input type="text" name="author" id="md_card_author" value="{{currentUser.profile.name}}">
-      </div>
-      <div class="input-field">
-        <label for="md_card_bg_img">Background image URL</label>
-        <input type="text" name="bg_img" id="md_card_bg_img">
-      </div>
-      <div class="input-field" id="tags-container">
-        <label for="md_card_tags">Tags (comma-separated )</label>
-        <div><input type="text" name="tags" id="md_card_tags"></div>
-      </div>
-    </form>
-    <div class="new_field row">
-      <div class="input-field col s9">
-        <input name="field_name" type="text" id="field_name" placeholder="name of new field">
-      </div>
-      <div class="input-field col s3">
-        <a id="md_addfield_btn">add field</a>
-      </div>
-    </div>
-  </div>
 </div>
+</template>
+
+<template name="create_slide_sidebar">
+<ul class="collapsible" data-collapsible="accordion">
+   <li>
+     <div class="collapsible-header">
+       Templates
+     </div>
+     <div class="collapsible-body">
+       {{#each template in templates}}
+         {{>template_card template}}
+       {{/each}}
+     </div>
+   </li>
+   <li>
+     <div class="collapsible-header">
+       Metadata
+     </div>
+     <div class="collapsible-body" id="slide-editor-metadata">
+       <form id="md_card_form">
+         <div class="input-field">
+           <label for="md_card_title" class="active">Title</label>
+           <input type="text" name="title" id="md_card_title" value="New slide">
+         </div>
+         <div class="input-field">
+           <label for="md_card_author" class="active">Author</label>
+           <input type="text" name="author" id="md_card_author" value="{{currentUser.profile.name}}">
+         </div>
+         <div class="input-field">
+           <label for="md_card_bg_img">Background image URL</label>
+           <input type="text" name="bg_img" id="md_card_bg_img">
+         </div>
+         <div class="input-field" id="tags-container">
+           <label for="md_card_tags">Tags (comma-separated )</label>
+           <div><input type="text" name="tags" id="md_card_tags"></div>
+         </div>
+       </form>
+       <div class="new_field row">
+         <div class="input-field col s9">
+           <input name="field_name" type="text" id="field_name" placeholder="name of new field">
+         </div>
+         <div class="input-field col s3">
+           <a id="md_addfield_btn">add field</a>
+         </div>
+       </div>
+     </div>
+   </li>
+ </ul>
 </template>
 
 <template name="template_card">

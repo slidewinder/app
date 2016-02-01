@@ -1,4 +1,4 @@
-Template.create_slide.helpers({
+Template.create_slide_sidebar.helpers({
   templates: function() {
     return templates;
   }
@@ -9,30 +9,18 @@ var templates = [
   { name: 'Title with image', description: 'Title with a large image', metadata: {}, content: '# Title\n![](http://lorempixel.com/1200/600/)' }
 ]
 
-Template.create_slide.onRendered(function() {
+Template.create_slide_sidebar.onRendered(function() {
   insignia($('#md_card_tags')[0], {
     delimiter: ',',
     deletion: true
   });
-})
+
+  $('.collapsible').collapsible({
+    accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+  });
+});
 
 Template.create_slide.events({
-  'click #md_addfield_btn': function() {
-    var field_name = $('#field_name').val();
-    $('#field_name').val('');
-    var field_div = $('<div>').attr('class', 'input-field');
-    var field_id = 'md_card_' + field_name;
-    $('<input>')
-      .attr('name', field_name)
-      .attr('id', field_id)
-      .attr('type', 'text')
-      .appendTo(field_div);
-    $('<label>')
-      .attr('for', field_id)
-      .text(field_name)
-      .appendTo(field_div);
-    field_div.appendTo('#md_card_form');
-  },
   'click .editor-toolbar > a.fa.fa-eye': function(e) {
     e.stopPropagation();
     if ($('a.fa.fa-eye').hasClass('active')) {
@@ -57,3 +45,22 @@ Template.create_slide.events({
     return false;
   }
 })
+
+Template.create_slide_sidebar.events({
+  'click #md_addfield_btn': function() {
+    var field_name = $('#field_name').val();
+    $('#field_name').val('');
+    var field_div = $('<div>').attr('class', 'input-field');
+    var field_id = 'md_card_' + field_name;
+    $('<input>')
+      .attr('name', field_name)
+      .attr('id', field_id)
+      .attr('type', 'text')
+      .appendTo(field_div);
+    $('<label>')
+      .attr('for', field_id)
+      .text(field_name)
+      .appendTo(field_div);
+    field_div.appendTo('#md_card_form');
+  }
+});

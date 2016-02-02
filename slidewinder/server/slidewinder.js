@@ -34,5 +34,9 @@ Meteor.methods({
       });
     });
     return html;
+  },
+  saveSlide: function(slidedata) {
+    var s = new slidewinder.slide(slidedata);
+    Slides.insert(s);
   }
 });

@@ -7,6 +7,7 @@
   bottom 0
   left 0
   right 0
+  margin 30px
   margin-right 0
 
 #sidebar-left
@@ -17,7 +18,7 @@
   overflow-y hidden
   margin-right 30px
   position relative
-  ul
+  ul.collapsible
     margin 0
     position absolute
     top 0
@@ -33,7 +34,16 @@
       uppercase()
 
 #sidebar-instructions
-  padding 20px
+  .collapsible-body
+    padding 10px !important
+  p
+    margin 0
+    margin-bottom 10px
+    padding 0
+  code
+    code: blue
+  ul, ul li
+    list-style circle inside
 
 #content-pane
   col(4/5)
@@ -52,19 +62,38 @@
 
 .slide-card
   width 300px
+  min-height 200px
+  overflow-x hidden
+  max-height 300px
+  overflow-y hidden
+  display inline-block
+  margin 0
+  margin-right 30px
+  margin-bottom 30px
+  float left
+  position relative
 
   .card-title
+    position absolute
     font-size 0.8rem
     background-color rgba(0, 0, 0, 0.7)
     width 100%
     top 0
+    left 0
     max-height 30%
+    color white
 
   .card-truncated
     width 100%
     height 100%
     display inline-block
     text-align left
+    h1, h2, h3, h4, h5, h6, p, ul, li, code, pre
+      font-size 0.4rem
+      margin 0
+      margin-bottom 2px
+    img
+      max-width 100%
 
   .card-menu
     width 62px

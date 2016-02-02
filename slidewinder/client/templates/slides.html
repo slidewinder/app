@@ -14,7 +14,29 @@
 
 <template name="create_slide_sidebar">
 <ul class="collapsible" data-collapsible="expandable">
-   <li>
+  <li id="sidebar-instructions">
+    <div class="collapsible-header active">
+      Instructions
+    </div>
+    <div class="collapsible-body">
+      <p>Create your card using markdown in the space on the right.</p>
+      <p>Use the <a class="fa fa-eye" href="#"></a> button to toggle a preview of your slide.</p>
+      <p>When you are done, press <code>save slide</code> at the top right.</p>
+      <p>The <strong>METADATA</strong> tab below can be used to provide information about this slide. You can use this information in the slide with handlebar tags. For example to display the title, use <code>{{|slide.title}}</code>.</p>
+      <p>Some metadata fields are always present:
+        <ul>
+          <li><code>title</code></li>
+          <li><code>author</code></li>
+          <li><code>background-image</code> (can be empty). If present, the linked image is used as the background of the slide.</li>
+          <li><code>tags</code> (can be empty)</li>
+        </ul>
+      </p>
+      <p>In addition to these standard fields, you can add custom fields. This allows you to use arbitrary data in your slide, and in the future will allow mass generation of slides from a template and data.</p>
+      <p>The values of fields you create can be used in the slide with the syntax <code>{{|slide.fieldname}}</code>. For example if you create a field called <code>subject</code>, you can use the value by entering <code>{{|slide.subject}}</code>.</p>
+    </div>
+  </li>
+  <!-- TEMPLATES - TODO: implement this -->
+   <!-- <li>
      <div class="collapsible-header">
        Templates
      </div>
@@ -23,7 +45,7 @@
          {{>template_card template}}
        {{/each}}
      </div>
-   </li>
+   </li> -->
    <li>
      <div class="collapsible-header active">
        Metadata
@@ -57,13 +79,6 @@
        </div>
      </div>
    </li>
-  <li id="sidebar-instructions">
-    <h4>Instructions</h4>
-    <p>Create your card using markdown in the space on the right</p>
-    <p>Use the <a class="fa fa-eye" href="#"></a> button to toggle a preview of your slide.</p>
-    <p>When you are done, press <pre>save slide</pre> at the top right.</p>
-    <p>The <strong>METADATA</strong> tab above can be used to provide information about this slide. You can use this information in the slide with handlebar tags. For example to display the title, use <pre>\{\{slide.title\}\}</pre>. If you create a new field called <pre>subject</pre>, you can use the value by entering <pre>\{\{slide.subject\}\}</pre></p>
-  </li>
  </ul>
 </template>
 
@@ -93,10 +108,10 @@
 </template>
 
 <template name="slide_text_card">
-<div class="card green lighten-3 slide-card">
-  <div class="card-content white-text">
+<div class="card slide-card">
+  <div class="card-content">
     <span class="card-title">{{title}}</span>
-    <div class="card-truncated">{{truncatedContent}}</div>
+    <div class="card-truncated">{{#markdown}}{{truncatedContent}}{{/markdown}}</div>
     <div class="card-menu">
       <a href="#"><i class="mdi mdi-menu"></i></a>
     </div>
@@ -111,7 +126,7 @@
     <span class="card-title">{{title}}</span>
   </div>
   <div class="card-content">
-    <div class="card-truncated">{{truncatedContent}}</div>
+    <div class="card-truncated">{{#markdown}}{{truncatedContent}}{{/markdown}}</div>
     <div class="card-menu valign-wrapper">
       <a href="#" class="valign"><i class="mdi mdi-menu"></i></a>
     </div>

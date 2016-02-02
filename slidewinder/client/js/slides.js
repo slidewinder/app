@@ -25,6 +25,10 @@ var getSlideData = function() {
   for (x in fields) {
     metadata[fields[x].name] = fields[x].value;
   }
+  metadata['background-image'] = metadata.bg_img;
+  delete metadata.bg_img;
+  metadata.owner = Meteor.userId();
+  metadata.license = 'cc-by 4.0';
   metadata.body = body;
   return metadata;
 }
@@ -40,10 +44,6 @@ var showSlidePreview = function(err, html) {
   iframe.contentWindow.document.close();
 }
 
-var slideSaved = function(err) {
-
-}
-
 Template.create_slide.events({
   'click .editor-toolbar > a.fa.fa-eye': function(e) {
     e.stopPropagation();
@@ -56,7 +56,8 @@ Template.create_slide.events({
   },
   'click #save_slide_btn': function(e) {
     var slidedata = getSlideData();
-    Meteor.call('saveSlide', slidedata, slideSaved);
+    Meteor.call('saveSlide', slidedata);
+    FlowRouter.go('/library');
   }
 })
 

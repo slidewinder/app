@@ -22,6 +22,8 @@ materialize:materialize
 kadira:flow-router
 meteorhacks:npm
 
+ahref:dragula
+
 kadira:blaze-layout
 mquandalle:stylus
 accounts-base
@@ -38,7 +40,6 @@ meteorhacks:kadira
 cedla:mdi
 utilities:avatar
 bigdata:elasticsearch
-ahref:dragula
 easy:search
 lyuyea:md-editor
 fortawesome:fontawesome

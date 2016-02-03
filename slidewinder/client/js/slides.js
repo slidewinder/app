@@ -79,3 +79,12 @@ Template.create_slide_sidebar.events({
     field_div.appendTo('#md_card_form');
   }
 });
+
+Template.slide_card.events({
+  'mouseover .slide-card': function(e) {
+    $(this).find('.card-menu').addClass('active');
+  },
+  'mouseout .slide-card': function(e) {
+    $(this).find('.card-menu').removeClass('active');
+  }
+});

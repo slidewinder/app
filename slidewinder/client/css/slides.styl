@@ -32,6 +32,7 @@
       color #222
       uppercase()
 
+
 #sidebar-instructions
   .collapsible-body
     padding 10px !important
@@ -61,9 +62,8 @@
 
 .slide-card
   width 300px
-  min-height 200px
+  height 260px
   overflow-x hidden
-  max-height 300px
   overflow-y hidden
   display inline-block
   margin 0
@@ -81,18 +81,20 @@
     left 0
     max-height 30%
     color white
+    padding-left 20px
 
-  .card-truncated
-    width 100%
-    height 100%
-    display inline-block
-    text-align left
-    h1, h2, h3, h4, h5, h6, p, ul, li, code, pre
-      font-size 0.4rem
-      margin 0
-      margin-bottom 2px
-    img
-      max-width 100%
+  .slide-text-card
+    .card-truncated
+      width 100%
+      height 100%
+      display inline-block
+      text-align left
+      h1, h2, h3, h4, h5, h6, p, ul, li, code, pre
+        font-size 0.4rem
+        margin 0
+        margin-bottom 2px
+      img
+        max-width 100%
 
   .card-menu
     width 62px
@@ -105,6 +107,10 @@
 
     .mdi
       color gray
+
+  .active
+    .mdi
+      color blue
 
 .create-slide
 
@@ -225,3 +231,7 @@
     width 100%
     height 100%
     border 0
+
+.slides
+  .row-body
+    padding 20px

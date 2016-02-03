@@ -108,7 +108,7 @@
 </template>
 
 <template name="slide_text_card">
-<div class="card slide-card">
+<div class="card slide-card slide-text-card">
   <div class="card-content">
     <span class="card-title">{{title}}</span>
     <div class="card-truncated">{{#markdown}}{{truncatedContent}}{{/markdown}}</div>
@@ -116,11 +116,12 @@
       <a href="#"><i class="mdi mdi-menu"></i></a>
     </div>
   </div>
+  <div class="slide-no"></div>
 </div>
 </template>
 
 <template name="slide_image_card">
-<div class="card slide-card">
+<div class="card slide-card slide-image-card">
   <div class="card-image">
     <img class="slide-card-img" src="{{image}}">
     <span class="card-title">{{title}}</span>
@@ -131,6 +132,6 @@
       <a href="#" class="valign"><i class="mdi mdi-menu"></i></a>
     </div>
   </div>
-
+  <div class="slide-no"></div>
 </div>
 </template>

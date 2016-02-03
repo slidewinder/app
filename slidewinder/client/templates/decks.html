@@ -1,0 +1,50 @@
+<template name="create_deck">
+<div class="main-view create-deck">
+  <div id="sidebar-left">
+    <ul class="collapsible" data-collapsible="expandable">
+      <li id="sidebar-instructions">
+        <div class="collapsible-header active">
+          <nav class="row-header-nav">
+            <div class="nav-wrapper row-header">
+              <h5>slides</h5>
+            </div>
+          </nav>
+          <form>
+            <!-- <div class="switch">
+              <label>
+                just me<input type="checkbox"><span class="lever"></span>everyone
+              </label>
+            </div> -->
+            <div class="search-wrapper">
+              <input id="search-slides" type="search">
+              <i class="mdi mdi-magnify"></i>
+            </div>
+          </form>
+        </div>
+        <div class="slides-results" id="slide-source">
+          {{#if slides}}
+            {{#each slide in slides}}
+              {{>slide_card slide}}
+            {{/each}}
+          {{else}}
+            {{>no_slides}}
+          {{/if}}
+        </div>
+      </li>
+     </ul>
+  </div>
+  <div id="content-pane">
+    <a id="save_deck_btn">
+      save deck
+    </a>
+    <nav class="row-header-nav">
+      <div class="nav-wrapper row-header">
+
+      </div>
+    </nav>
+    <div id="slide-receiver">
+
+    </div>
+  </div>
+</div>
+</template>

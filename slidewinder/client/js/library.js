@@ -12,19 +12,12 @@ var constructQuery = function(collection, onlyown) {
 }
 
 Template.library.helpers({
-  decks: function() {
-    console.log('library.slides()');
-    return Decks.find(constructQuery('decks', true));
-  },
-  slides: function() {
-    console.log('library.slides()');
-    return Slides.find(constructQuery('slides', true));
-  }
+  decksIndex: function() { return DeckIndex; },
+  slidesIndex: function() { return SlideIndex; }
 });
 
 Template.slide_card.helpers({
   image: function() {
-    console.log('slide_card.image()');
     return this['background-image'];
   }
 })
@@ -40,7 +33,6 @@ Template.slide_image_card.helpers({
     return this.body;
   },
   image: function() {
-    console.log('slide_card.image()');
     return this['background-image'];
   }
 })

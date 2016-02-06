@@ -23,10 +23,14 @@ var getSlideData = function() {
   var metadata = {};
   var fields = $("#md_card_form input").serializeArray();
   for (x in fields) {
-    metadata[fields[x].name] = fields[x].value;
+    var field = fields[x];
+    if (field.name == 'bg_img') {
+      metadata['background-image'] = 'url(' + metadata.bg_img + ')';
+      delete metadata.bg_img;
+    } else {
+      metadata[fields[x].name] = fields[x].value;
+    }
   }
-  metadata['background-image'] = metadata.bg_img;
-  delete metadata.bg_img;
   metadata.owner = Meteor.userId();
   metadata.license = 'cc-by 4.0';
   metadata.body = body;
@@ -81,10 +85,10 @@ Template.create_slide_sidebar.events({
 });
 
 Template.slide_card.events({
-  'mouseover .slide-card': function(e) {
+  'mouseenter.slide-card': function(e) {
     $(this).find('.card-menu').addClass('active');
   },
-  'mouseout .slide-card': function(e) {
+  'mouseleave.slide-card': function(e) {
     $(this).find('.card-menu').removeClass('active');
   }
 });

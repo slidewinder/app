@@ -1,3 +1,5 @@
+@import 'jeet'
+
 #library-main-view
   margin 30px
   color #666
@@ -10,13 +12,19 @@
   breadcrumb()
   margin-bottom 20px
 
-.content-row
+.content-col
   margin-bottom 10px
   border 1px solid #bbb
 
   nav
     box-shadow none
     background: #f2f2f2 linear-gradient(to bottom, #fff, #f2f2f2) repeat-x
+
+#decks
+  col(2/5)
+
+#slides
+  col(3/5)
 
 .row-header
   border-bottom 1px solid #bbb
@@ -50,16 +58,16 @@
       position absolute
       left 15px
       top 0
-  input[type='search']
-    input()
-    margin 0
-    padding-left 46px
-    position absolute
-    top 8px
-    right 8px
-    height 32px
-    width 264px
-    color #555
+    input[type='text']
+      input()
+      margin 0
+      padding-left 46px
+      position absolute
+      top 8px
+      right 8px
+      height 32px
+      width 264px
+      color #555
   .switch
     uppercase()
   .switch label input[type=checkbox]:checked + .lever
@@ -72,7 +80,11 @@
     background-color silver
 
 
+.row-body
+  padding 30px
+  margin 0
+  text-align center
+
+.decks
   .row-body
-    padding 30px
-    margin 0
-    text-align center
+    padding 20px

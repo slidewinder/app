@@ -2,22 +2,25 @@ var slidewinder = Meteor.npmRequire('slidewinder');
 
 Slides = new Mongo.Collection('slides');
 Decks = new Mongo.Collection('decks');
-//
-// var testslidedata = {
-//   license: 'cc-by 4.0',
-//   author: 'Richard Smith-Unna',
-//   owner: 'DNyT8Xhbr5GYqzDAt',
-//   private: false,
-//   body: 'test test test',
-//   title: 'This is the first ever slide on app.slidewinder.io',
-//   'background-image': 'http://weknowmemes.com/wp-content/uploads/2012/06/drunk-baby-got-your-nose.jpg',
-//   faves: [],
-//   tags: []
-// };
-//
-// var testslide = new slidewinder.slide(testslidedata);
-// console.log(testslide.dump());
-// Slides.insert(testslide.dump());
+Presentations = new Mongo.Collection('presentations');
+
+Meteor.publish("slides", function () {
+  return Slides.find({
+    $or: [
+      { private: {$ne: true} },
+      { owner: this.userId }
+    ]
+  });
+});
+
+Meteor.publish("decks", function () {
+  return Decks.find({
+    $or: [
+      { private: {$ne: true} },
+      { owner: this.userId }
+    ]
+  });
+});
 
 Meteor.methods({
   renderSlide: function(username, slidedata) {
@@ -38,5 +41,46 @@ Meteor.methods({
   saveSlide: function(slidedata) {
     var s = new slidewinder.slide(slidedata);
     Slides.insert(s);
+  },
+  saveDeck: function(deckdata) {
+    Decks.insert(deckdata);
+  },
+  renderDeck: function(deckdata) {
+    var query = deckdata.slides.map(function(s) { return { _id: s }; });
+    var slides = Slides.find({ $or: query }).fetch().map(function(s) {
+      if (s.bg_img) {
+        var url = s.bg_img;
+        s['backround-image'] = url;
+        delete s.bg_img;
+      }
+      if (s['background-image']) {
+        var url = s['background-image'];
+        if (!(/^url\(/.test(url))) {
+          url = 'url(' + url + ')';
+        }
+        s['background-image'] = url;
+      }
+      return new slidewinder.slide(s);
+    });
+    var d = new slidewinder.deck(null, deckdata);
+    d.preprocess(slides, function(){});
+    d.render(function(){});
+    var sha = CryptoJS.SHA1(d.renderedDeck).toString();
+    if (Presentations.find(sha).count() == 0) {
+      Presentations.insert({ _id: sha, html: d.renderedDeck });
+    }
+    return sha;
   }
+});
+
+SlideIndex = new EasySearch.Index({
+  collection: Slides,
+  fields: ['author', 'license', 'description', 'body', 'title', 'tags'],
+  engine: new EasySearch.MongoTextIndex()
+});
+
+DeckIndex = new EasySearch.Index({
+  collection: Decks,
+  fields: ['author', 'license', 'description', 'title', 'tags'],
+  engine: new EasySearch.MongoTextIndex()
 });

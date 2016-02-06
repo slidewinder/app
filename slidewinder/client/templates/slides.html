@@ -108,10 +108,14 @@
 </template>
 
 <template name="slide_text_card">
-<div class="card slide-card slide-text-card">
+<div class="card slide-card slide-text-card" id="{{_id}}">
   <div class="card-content">
     <span class="card-title">{{title}}</span>
-    <div class="card-truncated">{{#markdown}}{{truncatedContent}}{{/markdown}}</div>
+    <div class="card-truncated">{{#markdown}}{{truncatedContent}}{{/markdown}}
+      {{#each tag in tags}}
+        <span class="nsg-tag">{{tag}}</span>
+      {{/each}}
+    </div>
     <div class="card-menu">
       <a href="#"><i class="mdi mdi-menu"></i></a>
     </div>
@@ -121,13 +125,17 @@
 </template>
 
 <template name="slide_image_card">
-<div class="card slide-card slide-image-card">
+<div class="card slide-card slide-image-card" id="{{_id}}">
   <div class="card-image">
     <img class="slide-card-img" src="{{image}}">
     <span class="card-title">{{title}}</span>
   </div>
   <div class="card-content">
-    <div class="card-truncated">{{#markdown}}{{truncatedContent}}{{/markdown}}</div>
+    <div class="card-truncated">{{#markdown}}{{truncatedContent}}{{/markdown}}
+      {{#each tag in tags}}
+        <span class="nsg-tag">{{tag}}</span>
+      {{/each}}
+    </div>
     <div class="card-menu valign-wrapper">
       <a href="#" class="valign"><i class="mdi mdi-menu"></i></a>
     </div>

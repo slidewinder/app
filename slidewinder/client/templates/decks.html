@@ -38,12 +38,34 @@
       save deck
     </a>
     <nav class="row-header-nav">
-      <div class="nav-wrapper row-header">
-
+      <div class="nav-wrapper row-header" id="deck-metadata">
+        <input class="deck-metadata" id="deck-title" type="text" placeholder="title" name="title">
+        <input class="deck-metadata" id="deck-author" type="text" placeholder="author" value="{{currentUser.profile.name}}" name="author">
+        <input class="deck-metadata" id="deck-description" type="text" placeholder="description" name="description">
+        <div class="tags-wrapper"><input class="deck-metadata" id="deck-tags" type="text" placeholder="tags" name=""></div>
       </div>
     </nav>
     <div id="slide-receiver">
 
+    </div>
+  </div>
+</div>
+</template>
+
+<template name="deck_card">
+<div class="card deck-card slide-card" id="{{_id}}">
+  <div class="card-content">
+    <h4>{{title}}</h4>
+    {{description}}
+    {{#each tag in tags}}
+      <span class="nsg-tag">{{tag}}</span>
+    {{/each}}
+    <div class="deck-card-count">
+      <h5>{{size}} cards</h5>
+    </div>
+    <div class="deck-card-btn-bar">
+      <a href="#" class="deck-edit">edit</a>
+      <a href="#" class="deck-present">present</a>
     </div>
   </div>
 </div>

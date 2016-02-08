@@ -1,3 +1,39 @@
+<template name="slides">
+<div class="content-col" id="slides">
+  <nav class="row-header-nav">
+    <div class="nav-wrapper row-header">
+      <h5>slides</h5>
+      <form>
+        <div class="switch">
+          <label>
+            just me<input type="checkbox"><span class="lever"></span>everyone
+          </label>
+        </div>
+        <div class="search-wrapper">
+          {{> EasySearch.Input index=slidesIndex }}
+          <i class="mdi mdi-magnify"></i>
+        </div>
+      </form>
+    </div>
+  </nav>
+  <div class="row row-body">
+  {{#EasySearch.Each index=slidesIndex}}
+    {{>slide_card}}
+  {{/EasySearch.Each}}
+
+  {{#EasySearch.IfNoResults index=slidesIndex}}
+    {{>no_slides}}
+  {{/EasySearch.IfNoResults}}
+
+  {{> EasySearch.LoadMore index=slidesIndex}}
+  </div>
+</div>
+</template>
+
+<template name="no_slides">
+  <p>You don't have any slides yet! <a href="/slides/create">Create</a> or <a href="/slides/import">import</a> some to get started.</p>
+</template>
+
 <template name="create_slide">
 <div class="main-view create-slide">
   <div id="sidebar-left">

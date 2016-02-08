@@ -1,30 +1,37 @@
 @import 'jeet'
 
 #library-main-view
-  margin 30px
+  height 100%
   color #666
-
-.breadcrumb
-  uppercase()
-  font-weight 100
-  font-size 0.8rem
-  color #666
-  breadcrumb()
-  margin-bottom 20px
+  cf()
 
 .content-col
-  margin-bottom 10px
   border 1px solid #bbb
+  overflow scroll
+  height 90%
 
   nav
     box-shadow none
     background: #f2f2f2 linear-gradient(to bottom, #fff, #f2f2f2) repeat-x
 
 #decks
-  col(2/5)
-
+  position fixed
+  top 0
+  left 0
+  width calc(100% - 40px)
+  height calc(100% - 140px)
+  margin-left 20px
+  margin-top 120px
+  border 1px solid #bbb
 #slides
-  col(3/5)
+  position fixed
+  top 0
+  left 0
+  width calc(100% - 40px)
+  height calc(100% - 140px)
+  margin-left 20px
+  margin-top 120px
+  border 1px solid #bbb
 
 .row-header
   border-bottom 1px solid #bbb

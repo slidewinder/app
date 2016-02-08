@@ -8,6 +8,12 @@ var slidesSection = FlowRouter.group({
   prefix: '/slides'
 });
 
+slidesSection.route('/', {
+  action: function() {
+    BlazeLayout.render("tiered", {content: "slides"});
+  }
+});
+
 slidesSection.route('/create', {
   action: function() {
     BlazeLayout.render("tiered", {content: "create_slide"});
@@ -18,21 +24,15 @@ var decksSection = FlowRouter.group({
   prefix: '/decks'
 });
 
+decksSection.route('/', {
+  action: function() {
+    BlazeLayout.render("tiered", {content: "decks"});
+  }
+});
+
 decksSection.route('/create', {
   action: function() {
     BlazeLayout.render("tiered", {content: "create_deck"});
-  }
-});
-
-decksSection.route('/present', {
-  action: function() {
-    BlazeLayout.render("tiered", {content: "present_deck"});
-  }
-});
-
-FlowRouter.route('/library', {
-  action: function() {
-    BlazeLayout.render("tiered", {content: "library"});
   }
 });
 

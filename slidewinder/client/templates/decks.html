@@ -1,3 +1,41 @@
+<template name="no_decks">
+  <p>You don't have any decks yet! <a href="/decks/create">Create one to get started.</a></p>
+</template>
+
+<template name="decks">
+<div class="content-col" id="decks">
+  <nav class="row-header-nav">
+    <div class="nav-wrapper row-header">
+      <h5>decks</h5>
+      <form>
+        <div class="switch">
+          <label>
+            just me<input type="checkbox"><span class="lever"></span>everyone
+          </label>
+        </div>
+        <div class="search-wrapper">
+          {{> EasySearch.Input index=decksIndex }}
+          <i class="mdi mdi-magnify"></i>
+        </div>
+      </form>
+    </div>
+  </nav>
+  <div>
+    <div class="row row-body">
+    {{#EasySearch.Each index=decksIndex}}
+      {{>deck_card}}
+    {{/EasySearch.Each}}
+
+    {{#EasySearch.IfNoResults index=decksIndex}}
+      {{>no_decks}}
+    {{/EasySearch.IfNoResults}}
+
+    {{> EasySearch.LoadMore index=decksIndex}}
+    </div>
+  </div>
+</div>
+</template>
+
 <template name="create_deck">
 <div class="main-view create-deck">
   <div id="sidebar-left">

@@ -12,6 +12,10 @@ var constructQuery = function(collection, onlyown) {
   return opts;
 }
 
+Template.decks.helpers({
+  decksIndex: function() { return DeckIndex; }
+});
+
 Template.create_deck.helpers({
   slides: function() {
     return Slides.find(constructQuery('slides', true));

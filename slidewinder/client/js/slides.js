@@ -1,3 +1,29 @@
+Template.slides.helpers({
+  slidesIndex: function() { return SlideIndex; }
+});
+
+Template.slide_card.helpers({
+  image: function() {
+    return this['background-image'];
+  }
+})
+
+Template.slide_text_card.helpers({
+  truncatedContent: function() {
+    return this.body;
+  }
+})
+
+Template.slide_image_card.helpers({
+  truncatedContent: function() {
+    return this.body;
+  },
+  image: function() {
+    return this['background-image'];
+  }
+})
+
+
 Template.create_slide_sidebar.helpers({
   templates: function() {
     return templates;

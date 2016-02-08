@@ -16,6 +16,12 @@ Template.decks.helpers({
   decksIndex: function() { return DeckIndex; }
 });
 
+Template.decks.events({
+  'click #new-deck-btn': function() {
+    FlowRouter.go('/decks/create');
+  }
+})
+
 Template.create_deck.helpers({
   slides: function() {
     return Slides.find(constructQuery('slides', true));

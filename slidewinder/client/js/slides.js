@@ -2,6 +2,12 @@ Template.slides.helpers({
   slidesIndex: function() { return SlideIndex; }
 });
 
+Template.slides.events({
+  'click #new-slide-btn': function() {
+    FlowRouter.go('/slides/create');
+  }
+})
+
 Template.slide_card.helpers({
   image: function() {
     return this['background-image'];

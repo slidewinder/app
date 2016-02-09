@@ -11,11 +11,6 @@ var constructQuery = function(collection, onlyown) {
   return opts;
 }
 
-Template.library.helpers({
-  decksIndex: function() { return DeckIndex; },
-  slidesIndex: function() { return SlideIndex; }
-});
-
 Template.slide_card.helpers({
   image: function() {
     return this['background-image'];

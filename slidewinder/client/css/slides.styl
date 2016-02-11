@@ -78,6 +78,9 @@
   float left
   position relative
 
+  img
+    max-height 200px
+
   .card-title
     position absolute
     font-size 0.8rem
@@ -103,20 +106,53 @@
         max-width 100%
 
   .card-menu
-    width 62px
+    width 100%
     height 62px
     position absolute
-    right 0
+    left 0
     bottom 0
-    text-align center
+    text-align right
     padding 16px
-
-    .mdi
-      color gray
+    display none
+    button
+      button()
+      padding 10px
+      margin-left 10px
+      color white
 
   .active
     .mdi
       color blue
+
+  .slide-faves
+    area: rgba(0, 0, 0, 0.3)
+    position absolute
+    top calc(50% - 8px)
+    right -2px
+    padding 4px
+    padding-left 6px
+    padding-right 8px
+    margin 0
+    color yellow
+
+  .confirm-delete
+    z-index 999
+    position absolute
+    width 100%
+    height 100%
+    top 0
+    left 0
+    background rgba(0, 0, 0, 0.9)
+    text-align center
+    color white
+    padding-top 70px
+
+    .confirm-slide-del-btn
+      button(green)
+      margin 10px
+    .cancel-slide-del-btn
+      button(red)
+      margin 10px
 
 .create-slide
 

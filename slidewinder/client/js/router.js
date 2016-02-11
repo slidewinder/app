@@ -20,6 +20,12 @@ slidesSection.route('/create', {
   }
 });
 
+slidesSection.route('/edit/:slideId', {
+  action: function() {
+    BlazeLayout.render("tiered", {content: "edit_slide"});
+  }
+});
+
 var decksSection = FlowRouter.group({
   prefix: '/decks'
 });

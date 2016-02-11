@@ -40,7 +40,7 @@ Meteor.methods({
   },
   saveSlide: function(slidedata) {
     var s = new slidewinder.slide(slidedata);
-    Slides.insert(s);
+    Slides.update({ _id: s._id }, s, { upsert: true });
   },
   saveDeck: function(deckdata) {
     Decks.insert(deckdata);
@@ -55,7 +55,7 @@ Meteor.methods({
       }
       if (s['background-image']) {
         var url = s['background-image'];
-        if (!(/^url\(/.test(url))) {
+        if (url && !(/^url\(/.test(url))) {
           url = 'url(' + url + ')';
         }
         s['background-image'] = url;

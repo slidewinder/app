@@ -1,4 +1,9 @@
 <template name="slides">
+<ul id="slide-menu" class='dropdown-content'>
+  <li><a href="#!" class="menu-edit-card">one</a></li>
+  <li class="divider"></li>
+  <li><a href="#!" class="menu-delete-card">two</a></li>
+</ul>
 <div class="content-col" id="slides">
   <nav class="row-header-nav">
     <div class="nav-wrapper row-header">
@@ -32,7 +37,7 @@
 </template>
 
 <template name="no_slides">
-  <p>You don't have any slides yet! <a href="/slides/create">Create</a> or <a href="/slides/import">import</a> some to get started.</p>
+  <p>You don't have any slides yet! <a href="/slides/create">Create</a> some to get started.</p>
 </template>
 
 <template name="create_slide">
@@ -49,10 +54,14 @@
 </div>
 </template>
 
+<template name="edit_slide">
+{{>create_slide}}
+</template>
+
 <template name="create_slide_sidebar">
 <ul class="collapsible" data-collapsible="expandable">
   <li id="sidebar-instructions">
-    <div class="collapsible-header active">
+    <div class="collapsible-header">
       Instructions
     </div>
     <div class="collapsible-body">
@@ -138,14 +147,14 @@
 
 <template name="slide_card">
 {{#if image}}
-  {{>slide_image_card this}}
+  {{>slide_image_card}}
 {{else}}
-  {{>slide_text_card this}}
+  {{>slide_text_card}}
 {{/if}}
 </template>
 
 <template name="slide_text_card">
-<div class="card slide-card slide-text-card" id="{{_id}}">
+<div class="card slide-card slide-text-card" id="{{id}}">
   <div class="card-content">
     <span class="card-title">{{title}}</span>
     <div class="card-truncated">{{#markdown}}{{truncatedContent}}{{/markdown}}
@@ -153,16 +162,25 @@
         <span class="nsg-tag">{{tag}}</span>
       {{/each}}
     </div>
-    <div class="card-menu">
-      <a href="#"><i class="mdi mdi-menu"></i></a>
-    </div>
+  </div>
+  <div class="card-menu">
+    <button class="edit-slide-btn">
+      <i class="mdi mdi-pencil"></i>
+    </button>
+    <button class="delete-slide-btn">
+      <i class="mdi mdi-delete"></i>
+    </button>
+    <button class="fave-slide-btn">
+      <i class="mdi mdi-star"></i>
+    </button>
   </div>
   <div class="slide-no"></div>
+  <div class="slide-faves"><i class="mdi mdi-star"></i>{{n_faves}}</div>
 </div>
 </template>
 
 <template name="slide_image_card">
-<div class="card slide-card slide-image-card" id="{{_id}}">
+<div class="card slide-card slide-image-card" id="{{id}}">
   <div class="card-image">
     <img class="slide-card-img" src="{{image}}">
     <span class="card-title">{{title}}</span>
@@ -173,10 +191,19 @@
         <span class="nsg-tag">{{tag}}</span>
       {{/each}}
     </div>
-    <div class="card-menu valign-wrapper">
-      <a href="#" class="valign"><i class="mdi mdi-menu"></i></a>
-    </div>
+  </div>
+  <div class="card-menu">
+    <button class="edit-slide-btn">
+      <i class="mdi mdi-pencil"></i>
+    </button>
+    <button class="delete-slide-btn">
+      <i class="mdi mdi-delete"></i>
+    </button>
+    <button class="fave-slide-btn">
+      <i class="mdi mdi-star"></i>
+    </button>
   </div>
   <div class="slide-no"></div>
+  <div class="slide-faves"><i class="mdi mdi-star"></i>{{n_faves}}</div>
 </div>
 </template>

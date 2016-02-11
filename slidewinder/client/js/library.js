@@ -15,13 +15,13 @@ Template.slide_card.helpers({
   image: function() {
     return this['background-image'];
   }
-})
+});
 
 Template.slide_text_card.helpers({
   truncatedContent: function() {
     return this.body;
   }
-})
+});
 
 Template.slide_image_card.helpers({
   truncatedContent: function() {
@@ -30,4 +30,4 @@ Template.slide_image_card.helpers({
   image: function() {
     return this['background-image'];
   }
-})
+});

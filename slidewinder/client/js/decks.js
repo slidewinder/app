@@ -20,7 +20,7 @@ Template.decks.events({
   'click #new-deck-btn': function() {
     FlowRouter.go('/decks/create');
   }
-})
+});
 
 Template.create_deck.helpers({
   slides: function() {
@@ -96,7 +96,7 @@ Template.create_deck.events({
       return
     }
     Meteor.call('saveDeck', deckdata);
-    FlowRouter.go('/library');
+    FlowRouter.go('/decks');
   }
 });
 
@@ -116,7 +116,26 @@ Template.deck_card.events({
   'click .deck-present': function(e) {
     Meteor.call('renderDeck', this, presentDeck);
   },
-  'click .deck-edit': function(e) {
-    FlowRouter.go('/decks/edit', this);
+  'click .delete-deck-btn': function() {
+    var div = $('<div>')
+      .attr('class', 'confirm-delete')
+      .html('<h5>Really delete this deck?</h5>');
+    $('<button>')
+      .attr('class', 'confirm-deck-del-btn')
+      .text('yes')
+      .appendTo(div);
+    $('<button>')
+      .attr('class', 'cancel-deck-del-btn')
+      .text('no')
+      .appendTo(div);
+    var card = $('#' + this.__originalId);
+    div.appendTo(card);
+  },
+  'click .confirm-deck-del-btn': function() {
+    var filter = { _id: this.__originalId, };
+    Decks.remove(filter);
+  },
+  'click .cancel-deck-del-btn': function() {
+    $('#' + this.__originalId).find('.confirm-delete').remove();
   }
 });

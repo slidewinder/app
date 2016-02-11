@@ -92,7 +92,7 @@
 </template>
 
 <template name="deck_card">
-<div class="card deck-card slide-card" id="{{_id}}">
+<div class="card deck-card slide-card" id="{{__originalId}}">
   <div class="card-content">
     <h4>{{title}}</h4>
     {{description}}
@@ -104,6 +104,9 @@
     </div>
     <div class="deck-card-btn-bar">
       <!-- <a href="#" class="deck-edit">edit</a> -->
+      <button class="delete-deck-btn">
+        <i class="mdi mdi-delete"></i>
+      </button>
       <a href="#" class="deck-present">present</a>
     </div>
   </div>

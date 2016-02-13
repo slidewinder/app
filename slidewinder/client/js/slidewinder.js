@@ -20,9 +20,10 @@ Session.set('pagetitle', 'slidewinder')
 Slides = new Mongo.Collection('slides');
 Decks = new Mongo.Collection('decks');
 
-SlidesSub = Meteor.subscribe("slides", false);
-Meteor.subscribe("decks");
-
+Tracker.autorun(function () {
+  SlidesSub = Meteor.subscribe("slides", Session.get('slides.show-everyone'));
+  DecksSub = Meteor.subscribe("decks", Session.get('decks.show-everyone'));
+});
 
 SlideIndex = new EasySearch.Index({
   collection: Slides,

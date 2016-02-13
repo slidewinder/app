@@ -47,8 +47,8 @@ Template.slides.events({
   },
   'change #me-or-everyone': function() {
     var everyone = $('#me-or-everyone')[0].checked;
-    SlidesSub.stop();
-    Meteor.subscribe('slides', everyone);
+    console.log('Switching slides subscription to everyone =', everyone);
+    Session.get('decks.show-everyone', everyone);
   }
 })
 

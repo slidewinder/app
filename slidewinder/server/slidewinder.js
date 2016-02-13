@@ -11,17 +11,22 @@ Meteor.publish("slides", function (everyone) {
   if (everyone) {
     cond.push({ private: false });
   }
+  console.log('Slide subscription:', cond);
   return Slides.find({
     $or: cond
   });
 });
 
-Meteor.publish("decks", function () {
+Meteor.publish("decks", function (everyone) {
+  var cond = [
+    { owner: this.userId }
+  ]
+  if (everyone) {
+    cond.push({ private: false });
+  }
+  console.log('Deck subscription:', cond);
   return Decks.find({
-    $or: [
-      { private: false },
-      { owner: this.userId }
-    ]
+    $or: cond
   });
 });
 

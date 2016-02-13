@@ -19,6 +19,11 @@ Template.decks.helpers({
 Template.decks.events({
   'click #new-deck-btn': function() {
     FlowRouter.go('/decks/create');
+  },
+  'change #me-or-everyone': function() {
+    var everyone = $('#me-or-everyone')[0].checked;
+    console.log('Switching decks subscription to everyone =', everyone);
+    Session.get('decks.show-everyone', everyone);
   }
 });
 
@@ -69,9 +74,9 @@ var getDeckData = function() {
   for (x in fields) {
     metadata[fields[x].name] = fields[x].value;
   }
+  metadata['private'] = !($('#deck-metadata #me-or-everyone')[0].checked);
   metadata.owner = Meteor.userId();
   metadata.license = 'cc-by 4.0';
-  metadata.private = false;
   metadata.slides = slides;
   return metadata;
 }

@@ -4,19 +4,22 @@ Slides = new Mongo.Collection('slides');
 Decks = new Mongo.Collection('decks');
 Presentations = new Mongo.Collection('presentations');
 
-Meteor.publish("slides", function () {
+Meteor.publish("slides", function (everyone) {
+  var cond = [
+    { owner: this.userId }
+  ]
+  if (everyone) {
+    cond.push({ private: false });
+  }
   return Slides.find({
-    $or: [
-      { private: {$ne: true} },
-      { owner: this.userId }
-    ]
+    $or: cond
   });
 });
 
 Meteor.publish("decks", function () {
   return Decks.find({
     $or: [
-      { private: {$ne: true} },
+      { private: false },
       { owner: this.userId }
     ]
   });

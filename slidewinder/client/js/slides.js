@@ -44,6 +44,11 @@ Template.slides.events({
   },
   'click .cancel-slide-del-btn': function() {
     $('#' + this.__originalId).find('.confirm-delete').remove();
+  },
+  'change #me-or-everyone': function() {
+    var everyone = $('#me-or-everyone')[0].checked;
+    SlidesSub.stop();
+    Meteor.subscribe('slides', everyone);
   }
 })
 
@@ -127,6 +132,7 @@ var getSlideData = function() {
     metadata.faves = [];
     metadata.owner = Meteor.userId();
     metadata.license = 'cc-by 4.0';
+    metadata.private = false;
   } else {
     // editing an existing slide, so we merge the edited properties
     // into the original slide

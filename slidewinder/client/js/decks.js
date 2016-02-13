@@ -71,6 +71,7 @@ var getDeckData = function() {
   }
   metadata.owner = Meteor.userId();
   metadata.license = 'cc-by 4.0';
+  metadata.private = false;
   metadata.slides = slides;
   return metadata;
 }

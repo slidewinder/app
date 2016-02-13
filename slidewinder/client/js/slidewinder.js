@@ -20,7 +20,7 @@ Session.set('pagetitle', 'slidewinder')
 Slides = new Mongo.Collection('slides');
 Decks = new Mongo.Collection('decks');
 
-Meteor.subscribe("slides");
+SlidesSub = Meteor.subscribe("slides", false);
 Meteor.subscribe("decks");
 
 

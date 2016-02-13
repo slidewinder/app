@@ -74,6 +74,9 @@ Template.slide_text_card.helpers({
   },
   n_faves: function() {
     return this.faves.length || 0;
+  },
+  isOwner: function() {
+    return this.owner == Meteor.userId();
   }
 })
 
@@ -90,6 +93,9 @@ Template.slide_image_card.helpers({
   },
   n_faves: function() {
     return this.faves.length || 0;
+  },
+  isOwner: function() {
+    return this.owner == Meteor.userId();
   }
 })
 

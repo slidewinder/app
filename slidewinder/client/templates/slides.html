@@ -46,9 +46,14 @@
     {{>create_slide_sidebar}}
   </div>
   <div id="content-pane">
-    <a id="save_slide_btn">
-      save slide
-    </a>
+    <div id="save_slide_btns">
+      <a id="save_slide_btn">
+        save + new
+      </a>
+      <a id="save_slide_and_new_btn">
+        save
+      </a>
+    </div>
     {{>slide_editor}}
   </div>
 </div>
@@ -164,12 +169,14 @@
     </div>
   </div>
   <div class="card-menu">
+    {{#if isOwner}}
     <button class="edit-slide-btn">
       <i class="mdi mdi-pencil"></i>
     </button>
     <button class="delete-slide-btn">
       <i class="mdi mdi-delete"></i>
     </button>
+    {{/if}}
     <button class="fave-slide-btn">
       <i class="mdi mdi-star"></i>
     </button>
@@ -193,12 +200,14 @@
     </div>
   </div>
   <div class="card-menu">
+    {{#if isOwner}}
     <button class="edit-slide-btn">
       <i class="mdi mdi-pencil"></i>
     </button>
     <button class="delete-slide-btn">
       <i class="mdi mdi-delete"></i>
     </button>
+    {{/if}}
     <button class="fave-slide-btn">
       <i class="mdi mdi-star"></i>
     </button>

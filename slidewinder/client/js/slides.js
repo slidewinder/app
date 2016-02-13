@@ -2,13 +2,18 @@ Template.slides.helpers({
   slidesIndex: function() { return SlideIndex; }
 });
 
-
 Template.slides.events({
   'click #new-slide-btn': function() {
     FlowRouter.go('/slides/create');
   },
   'click .edit-slide-btn': function() {
-    FlowRouter.go('/slides/edit/' + this.__originalId);
+    // only the owner can edit a slide - also enforced in the router,
+    // and on the server
+    if (Meteor.userId() === this.owner) {
+      FlowRouter.go('/slides/edit/' + this.__originalId);
+    } else {
+      Materialize.toast("You can only edit slides that belong to you.", 4000, 'flash-err');
+    }
   },
   'click .delete-slide-btn': function() {
     var div = $('<div>')
@@ -26,21 +31,22 @@ Template.slides.events({
     div.appendTo(card);
   },
   'click .fave-slide-btn': function() {
-    var filter = { _id: this.__originalId, };
-    var update = {};
-    if (!(_.isArray(this.faves))) {
-      this.faves = [];
-      update.$set = { faves: [Meteor.userId()] };
-    } else if (_.include(this.faves, Meteor.userId())) {
-      update.$pull = { faves: Meteor.userId() };
-    } else {
-      update.$push = { faves: Meteor.userId() };
-    }
-    Slides.update(filter, update);
+    Slides.methods.toggleFave.call({
+      slideId: this.__originalId
+    }, (err, res) => {
+      if (err) {
+        Materialize.toast(err, 4000, 'flash-err');
+      }
+    });
   },
   'click .confirm-slide-del-btn': function() {
-    var filter = { _id: this.__originalId, };
-    Slides.remove(filter);
+    Slides.methods.removeSlide.call({
+      slideId: this.__originalId
+    }, (err, res) => {
+      if (err) {
+        Materialize.toast(err, 4000, 'flash-err');
+      }
+    });
   },
   'click .cancel-slide-del-btn': function() {
     $('#' + this.__originalId).find('.confirm-delete').remove();
@@ -86,7 +92,6 @@ Template.slide_image_card.helpers({
     return this.faves.length || 0;
   }
 })
-
 
 Template.create_slide_sidebar.helpers({
   templates: function() {
@@ -206,14 +211,25 @@ Template.create_slide.events({
     if ($('a.fa.fa-eye').hasClass('active')) {
       var slidedata = getSlideData();
       var author = Meteor.user().profile.name;
-      Meteor.call('renderSlide', author, slidedata, showSlidePreview);
+      Slides.methods.renderSlide.call(
+        { author: author, slidedata: slidedata },
+        showSlidePreview
+      );
     }
     return false;
   },
   'click #save_slide_btn': function(e) {
     var slidedata = getSlideData();
-    Meteor.call('saveSlide', slidedata);
-    FlowRouter.go('/slides');
+    Slides.methods.saveSlide.call({
+      slidedata: slidedata
+    }, (err, res) => {
+      if (err) {
+        Materialize.toast(err, 4000, 'flash-err');
+        setTimeout(function(){ FlowRouter.go('/slides') }, 2000);
+      } else {
+        FlowRouter.go('/slides');
+      }
+    });
   }
 })
 
@@ -238,6 +254,7 @@ Template.edit_slide.onRendered(function() {
   // load the card for editing
   var slide_id = FlowRouter.getParam("slideId");
   var res = Slides.find(slide_id);
+
   if (res.count() == 0) {
     Materialize.toast("The slide you're trying to edit doesn't exist :(", 4000, 'flash-err');
     setTimeout(function(){ FlowRouter.go('/slides') }, 2000);
@@ -245,6 +262,13 @@ Template.edit_slide.onRendered(function() {
   }
 
   var slide = res.fetch()[0];
+
+  if (Meteor.userId() != slide.owner) {
+    Materialize.toast("You can only edit slides that belong to you.", 4000, 'flash-err');
+    setTimeout(function(){ FlowRouter.go('/slides') }, 2000);
+    return;
+  }
+
   setSlideData(slide);
 
 });

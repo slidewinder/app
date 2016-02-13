@@ -1,21 +1,6 @@
-var slidewinder = Meteor.npmRequire('slidewinder');
 
-Slides = new Mongo.Collection('slides');
 Decks = new Mongo.Collection('decks');
 Presentations = new Mongo.Collection('presentations');
-
-Meteor.publish("slides", function (everyone) {
-  var cond = [
-    { owner: this.userId }
-  ]
-  if (everyone) {
-    cond.push({ private: false });
-  }
-  console.log('Slide subscription:', cond);
-  return Slides.find({
-    $or: cond
-  });
-});
 
 Meteor.publish("decks", function (everyone) {
   var cond = [
@@ -24,34 +9,26 @@ Meteor.publish("decks", function (everyone) {
   if (everyone) {
     cond.push({ private: false });
   }
-  console.log('Deck subscription:', cond);
   return Decks.find({
     $or: cond
   });
 });
 
+// Deny all client-side updates on all collections
+Decks.deny({
+  insert() { return true; },
+  update() { return true; },
+  remove() { return true; },
+});
+Presentations.deny({
+  insert() { return true; },
+  update() { return true; },
+  remove() { return true; },
+});
+
 Meteor.methods({
-  renderSlide: function(username, slidedata) {
-    var s = new slidewinder.slide(slidedata);
-    var d = new slidewinder.deck(null, {
-      author: username,
-      title: 'slide preview',
-      tags: []
-    }, 'remark');
-    html = ''
-    d.preprocess.call(d, [s], function() {
-      d.render.call(d, function(){
-        html = d.renderedDeck;
-      });
-    });
-    return html;
-  },
-  saveSlide: function(slidedata) {
-    var s = new slidewinder.slide(slidedata);
-    Slides.update({ _id: s._id }, s, { upsert: true });
-  },
   saveDeck: function(deckdata) {
-    Decks.insert(deckdata);
+    Decks.update({ _id: deckdata._id }, deckdata, { upsert: true });
   },
   renderDeck: function(deckdata) {
     var query = deckdata.slides.map(function(s) { return { _id: s }; });

@@ -6,6 +6,7 @@ accounts-password@1.1.4
 accounts-ui@1.1.6
 accounts-ui-unstyled@1.1.8
 ahref:dragula@3.5.4
+aldeed:simple-schema@1.5.3
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
@@ -67,6 +68,7 @@ localstorage@1.0.5
 logging@1.0.8
 lyuyea:md-editor@0.4.0
 materialize:materialize@0.97.5
+mdg:validation-error@0.2.0
 meteor@1.1.10
 meteor-base@1.0.1
 meteorhacks:async@1.0.0

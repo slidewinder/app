@@ -17,7 +17,6 @@ Deps.autorun(function(){
 
 Session.set('pagetitle', 'slidewinder')
 
-Slides = new Mongo.Collection('slides');
 Decks = new Mongo.Collection('decks');
 
 Tracker.autorun(function () {

@@ -1,6 +1,6 @@
 Slides = new Mongo.Collection('slides');
 
-var slidewinder = {}
+slidewinder = {};
 
 if (Meteor.isServer) {
   slidewinder = Meteor.npmRequire('slidewinder');

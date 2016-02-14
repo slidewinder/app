@@ -225,19 +225,50 @@ Template.create_slide.events({
     return false;
   },
   'click #save_slide_btn': function(e) {
-    var slidedata = getSlideData();
-    Slides.methods.saveSlide.call({
-      slidedata: slidedata
-    }, (err, res) => {
-      if (err) {
-        Materialize.toast(err, 4000, 'flash-err');
-        setTimeout(function(){ FlowRouter.go('/slides') }, 2000);
-      } else {
-        FlowRouter.go('/slides');
-      }
-    });
+    saveSlide('/slides');
+  },
+  'click #save_slide_and_new_btn': function(e) {
+    saveSlide('/slides/create');
   }
 })
+
+var saveSlide = function(route) {
+  var slidedata = getSlideData();
+  Slides.methods.saveSlide.call({
+    slidedata: slidedata
+  }, (err, res) => {
+    if (err) {
+      Materialize.toast(err, 4000, 'flash-err');
+    } else {
+      FlowRouter.go(route);
+    }
+  });
+}
+
+var focusEditor = function() {
+  $('.CodeMirror-code').focus();
+}
+
+var focusMetadata = function() {
+  $('#md_card_title').focus();
+}
+
+var setupKeyboardShortcuts = function() {
+  $('input, textarea').addClass('mousetrap');
+  Mousetrap.bind('ctrl+b n', function() {
+    saveSlide('/slides/create')
+  });
+  Mousetrap.bind('ctrl+b s', function() {
+    saveSlide('/slides')
+  });
+  Mousetrap.bind('ctrl+b e', function() { focusEditor(); });
+  Mousetrap.bind('ctrl+b m', function() { focusMetadata(); });
+}
+
+Template.create_slide.onRendered(function() {
+  setupKeyboardShortcuts();
+  focusMetadata();
+});
 
 Template.create_slide_sidebar.events({
   'click #md_addfield_btn': function() {

@@ -57,14 +57,18 @@
   b()
   position relative
 
-  #save_slide_btn
+  #save_slide_btn, #save_slide_and_new_btn
     button(#666)
     width auto
+    z-index 102
+    uppercase()
+    display inline-block
+
+  #save_slide_btns
     position absolute
     top 8px
     right 8px
-    z-index 102
-    uppercase()
+    z-index 999
 
 .slide-card
   width 300px
